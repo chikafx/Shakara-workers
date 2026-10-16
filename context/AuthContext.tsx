@@ -13,9 +13,10 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  getAuth,
   type User,
 } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { app } from "@/lib/firebase";
 
 type AuthContextType = {
   user: User | null;
@@ -36,14 +37,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    return onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser);
+    let unsubscribe: (() => void) | undefined;
+
+    try {
+      unsubscribe = onAuthStateChanged(getAuth(app), (firebaseUser) => {
+        setUser(firebaseUser);
+        setLoading(false);
+      });
+    } catch (error) {
+      console.error("Firebase Auth could not be initialized", error);
       setLoading(false);
-    });
+    }
+
+    return () => unsubscribe?.();
   }, []);
 
   const login = async (email: string, password: string) => {
-    await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(getAuth(app), email, password);
   };
 
   const signup = async (
@@ -56,12 +66,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error("Enter a display name.");
     }
 
-    const result = await createUserWithEmailAndPassword(auth, email, password);
+    const result = await createUserWithEmailAndPassword(
+      getAuth(app),
+      email,
+      password,
+    );
     await updateProfile(result.user, { displayName: normalizedName });
   };
 
   const logout = async () => {
-    await signOut(auth);
+    await signOut(getAuth(app));
   };
 
   return (
