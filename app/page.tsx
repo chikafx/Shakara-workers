@@ -1,69 +1,88 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Link from "next/link";
+import { ArrowRight, Palmtree } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
+import { useOnlineCount } from "@/hooks/useOnlineCount";
+import { usePresence } from "@/hooks/usePresence";
+
+export default function HomePage() {
+  const { user } = useAuth();
+  const onlineCount = useOnlineCount();
+
+  usePresence(
+    user?.uid ?? null,
+    user?.displayName ?? null,
+    null,
+    "Working",
+  );
+
+  const lobbyStatus =
+    onlineCount === null
+      ? "Checking the lobby"
+      : onlineCount === 0
+        ? "Be the first on the island"
+        : `${onlineCount} player${onlineCount === 1 ? "" : "s"} online`;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="relative isolate flex min-h-svh flex-col overflow-hidden bg-[#173f34] text-white">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[url('/island-bg.svg')] bg-cover bg-position-[center_44%]"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[#143d32]/55"
+      />
+
+      <header className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-5 py-5 sm:px-8 sm:py-6">
+        <Link
+          href="/"
+          aria-label="Island Desk home"
+          className="flex items-center gap-2.5"
+        >
+          <span className="grid size-10 place-items-center rounded-xl border-2 border-[#18372f] bg-[#f6d74a] text-[#18372f] shadow-[3px_3px_0_#18372f]">
+            <Palmtree aria-hidden="true" size={22} strokeWidth={2.5} />
+          </span>
+          <span className="text-lg font-black">Island Desk</span>
+        </Link>
+
+        <div
+          className="inline-flex min-h-9 items-center gap-2 rounded-full border border-white/35 bg-[#18372f]/75 px-3 text-xs font-bold text-white"
+          aria-live="polite"
+        >
+          <span
+            aria-hidden="true"
+            className={`size-2.5 rounded-full ${onlineCount === null ? "bg-[#f6d74a]" : "bg-[#75c98b]"}`}
+          />
+          {lobbyStatus}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </header>
+
+      <section className="mx-auto flex w-full max-w-4xl flex-1 flex-col items-center justify-center px-5 py-12 text-center sm:px-8">
+        <p className="mb-5 text-xs font-black uppercase tracking-[0.18em] text-[#f6d74a]">
+          Lagos Island / Multiplayer life
+        </p>
+        <h1 className="text-5xl font-black leading-[1.05] sm:text-6xl md:text-7xl">
+          Your 9-to-5
+          <br />
+          <span className="text-[#f6d74a]">on the Island</span>
+        </h1>
+        <p className="mt-5 text-base font-medium text-white/85 sm:text-lg">
+          Move. Chat. Find rides. Live the Island life.
+        </p>
+        <Link
+          href={user ? "/map" : "/signup"}
+          className="mt-9 inline-flex min-h-14 items-center gap-3 rounded-2xl border-2 border-[#18372f] bg-[#f6d74a] px-8 text-lg font-black text-[#18372f] shadow-[5px_5px_0_#18372f] transition-transform hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#18372f] active:translate-y-0.5 active:shadow-[2px_2px_0_#18372f] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        >
+          {user ? "Enter Island" : "Play Now"}
+          <ArrowRight aria-hidden="true" size={20} />
+        </Link>
+      </section>
+
+      <footer className="px-5 pb-6 text-center text-xs font-semibold text-white/75">
+        Free to play <span aria-hidden="true">/</span> Lagos Island
+      </footer>
+    </main>
   );
 }

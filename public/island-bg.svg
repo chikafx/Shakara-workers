@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" fill="none">
+  <defs>
+    <linearGradient id="water" x1="140" y1="0" x2="1200" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c6e5e5"/>
+      <stop offset="1" stop-color="#91c8c5"/>
+    </linearGradient>
+    <linearGradient id="land" x1="389" y1="100" x2="1007" y2="793" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#d9e9bd"/>
+      <stop offset="1" stop-color="#bdd9a3"/>
+    </linearGradient>
+    <pattern id="water-lines" width="84" height="84" patternUnits="userSpaceOnUse" patternTransform="rotate(-18)">
+      <path d="M0 16h84M0 54h84" stroke="#f3ffff" stroke-opacity=".25" stroke-width="2"/>
+    </pattern>
+    <pattern id="blocks" width="76" height="64" patternUnits="userSpaceOnUse" patternTransform="rotate(-14)">
+      <rect x="6" y="7" width="25" height="18" rx="4" fill="#84b990" fill-opacity=".28"/>
+      <rect x="42" y="5" width="26" height="20" rx="4" fill="#fff8df" fill-opacity=".42"/>
+      <rect x="18" y="36" width="42" height="17" rx="4" fill="#83ae86" fill-opacity=".24"/>
+    </pattern>
+    <clipPath id="land-clip">
+      <path d="M294 128 395 91l93 21 62-24 91 35 87-11 77 43 112-8 54 60-26 58 58 49-21 72 42 75-47 66 9 67-69 43-18 83-86 44-59 79-82-16-55 42-69-24-91 13-78-42-90 8-38-54-74-5-32-67-67-30 13-79-39-66 33-67-28-62 38-62-15-64 57-49 11-76 75-14 48-54Z"/>
+    </clipPath>
+  </defs>
+  <path fill="url(#water)" d="M0 0h1440v900H0z"/>
+  <path fill="url(#water-lines)" d="M0 0h1440v900H0z"/>
+  <path d="M0 717c194-44 290-13 421 47 120 55 212 102 350 87 150-16 221-105 337-149 112-42 222-31 332-9v207H0V717Z" fill="#75bcb5" fill-opacity=".38"/>
+  <path d="M294 128 395 91l93 21 62-24 91 35 87-11 77 43 112-8 54 60-26 58 58 49-21 72 42 75-47 66 9 67-69 43-18 83-86 44-59 79-82-16-55 42-69-24-91 13-78-42-90 8-38-54-74-5-32-67-67-30 13-79-39-66 33-67-28-62 38-62-15-64 57-49 11-76 75-14 48-54Z" fill="url(#land)" stroke="#fff7dc" stroke-width="14" stroke-linejoin="round"/>
+  <g clip-path="url(#land-clip)">
+    <path fill="url(#blocks)" d="M220 45h1010v850H220z"/>
+    <path d="M245 247c167-51 282-7 405 38 129 47 230 14 344-35 92-40 172-49 265-22M231 541c145-50 236-34 355 18 136 60 242 65 369-5 108-59 184-84 303-64M396 83c-4 139 81 206 162 278 79 70 88 146 47 234-33 71-46 145-22 257M764 74c-27 122 13 208 85 286 81 87 105 173 51 277-34 65-50 140-27 248M1047 117c-74 105-70 204-16 298 47 81 46 162-14 245-50 69-72 147-59 227" stroke="#fffdf1" stroke-opacity=".77" stroke-width="15" stroke-linecap="round"/>
+    <path d="M245 247c167-51 282-7 405 38 129 47 230 14 344-35 92-40 172-49 265-22M231 541c145-50 236-34 355 18 136 60 242 65 369-5 108-59 184-84 303-64M396 83c-4 139 81 206 162 278 79 70 88 146 47 234-33 71-46 145-22 257M764 74c-27 122 13 208 85 286 81 87 105 173 51 277-34 65-50 140-27 248M1047 117c-74 105-70 204-16 298 47 81 46 162-14 245-50 69-72 147-59 227" stroke="#91b99a" stroke-opacity=".32" stroke-width="3" stroke-linecap="round"/>
+    <path d="M309 382c74-40 120-28 175 2-34 55-96 82-169 62l-6-64ZM835 369c57-41 115-44 177-12-8 67-54 103-131 99l-46-87ZM548 665c69-44 142-35 194 15-43 53-108 67-183 40l-11-55Z" fill="#8dbb88" fill-opacity=".6"/>
+    <path d="M489 128c72 29 119 54 165 104M910 629c42-46 102-70 163-76M328 595c39 18 69 46 93 86" stroke="#f2c985" stroke-opacity=".85" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="501" cy="329" r="7" fill="#df9b57"/>
+    <circle cx="936" cy="310" r="7" fill="#df9b57"/>
+    <circle cx="682" cy="577" r="7" fill="#df9b57"/>
+    <circle cx="1005" cy="550" r="7" fill="#df9b57"/>
+  </g>
+  <path d="M153 244c43-22 79-27 119-21M1171 777c48-9 88-4 131 18M1079 113c37 1 67 14 94 37" stroke="#f3ffff" stroke-opacity=".56" stroke-width="4" stroke-linecap="round"/>
+</svg>
